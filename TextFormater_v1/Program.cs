@@ -15,10 +15,10 @@ namespace TextFormater_v1
             //замена пунктуацию на пробелы и .
             input_text = input_text.Replace('?', '.').Replace('!', '.').Replace('\"', ' ').Replace('(', ' ').Replace(')', ' ').Replace(',', ' ').Replace('-', ' ').Replace(':', ' '); 
             input_text = input_text.ToUpper().Replace('.','\n'); //переход в верхний регистр и замена точек на \n
-            input_text = Regex.Replace(input_text, "\\n\\s", "\n"); //если перед началом предложения пробел, убираем пробел
-            input_text = Regex.Replace(input_text, "\\n{2,}", "\n"); //если идут несколько \n подряд, оставляем один
             input_text = new string(input_text.Where(c => !char.IsDigit(c)).Where(c => c != '\r').ToArray()); //отфильтровываем цифры и \r
             input_text = Regex.Replace(input_text, "\\u0020{2,}", " "); //если идут несколько пробелов подряд, оставляем один
+            input_text = Regex.Replace(input_text, "\\n\\u0020", "\n"); //если перед началом предложения пробел, убираем пробел
+            input_text = Regex.Replace(input_text, "\\n{2,}", "\n"); //если идут несколько \n подряд, оставляем один
 
             return input_text; 
         }
